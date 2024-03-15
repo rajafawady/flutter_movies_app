@@ -8,7 +8,7 @@ Welcome to the Flutter Movies App repository! This is a mobile application built
 - Filter movies by genre
 - Search for specific movies
 - View movie details including description and trailer
-- Smooth navigation using the BLoC pattern and Go routing
+- Smooth navigation using the Flutter Provider and Go routing
 
 ## Technologies Used
 
