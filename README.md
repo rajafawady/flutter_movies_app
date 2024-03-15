@@ -24,13 +24,13 @@ To get started with the Flutter Movies App, follow these steps:
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/rajafawady/movies_app.git
+   git clone https://github.com/rajafawady/flutter_movies_app.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd movies_app
+   cd flutter_movies_app
    ```
 
 3. Install dependencies:
