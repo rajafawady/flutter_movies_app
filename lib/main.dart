@@ -1,29 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/home/ui/home.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movies_app/api/api.dart';
+import 'package:movies_app/data/movie_data_model.dart';
+import 'package:movies_app/providers/favorites_provider.dart';
+import 'package:movies_app/routers/routes.dart';
+import 'package:provider/provider.dart';
 
-import 'home/bloc/home_bloc.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Hive.registerAdapter(MovieDataModelAdapter());
+  await Hive.initFlutter();
 
-void main() {
-  runApp(const MyApp());
+  await Hive.openBox('trendingMovies');
+  await Hive.openBox('favoriteMovies');
+
+  final movieBox = Hive.box('trendingMovies');
+
+  if (movieBox.isEmpty) {
+    await discover();
+  }
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => FavoriteMoviesProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Movies App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc(),
-        child: Home(),
-      ),
+      routerConfig: AppNavigation.router,
     );
   }
 }
