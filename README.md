@@ -14,7 +14,7 @@ Welcome to the Flutter Movies App repository! This is a mobile application built
 
 - Flutter
 - Dart
-- BLoC Pattern
+- Flutter Provider
 - Go Routing
 
 ## Getting Started
